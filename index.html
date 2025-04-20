@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sonic Watch & Earn</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #0ff, #f0f);
+      color: #222;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    header {
+      background: #000;
+      color: #fff;
+      padding: 15px;
+      font-size: 24px;
+    }
+    .balance {
+      font-size: 26px;
+      margin: 20px;
+    }
+    button {
+      padding: 15px 25px;
+      font-size: 20px;
+      border: none;
+      background-color: #28a745;
+      color: white;
+      cursor: pointer;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    .ad-section {
+      margin-top: 30px;
+      padding: 15px;
+      background: #fff;
+      border-radius: 12px;
+      max-width: 350px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .ad-placeholder {
+      width: 300px;
+      height: 250px;
+      background: #ddd;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #333;
+    }
+    footer {
+      margin-top: 50px;
+      font-size: 14px;
+    }
+    a {
+      color: #0066cc;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Sonic Watch & Earn
+  </header>
+
+  <div class="balance">
+    Your Points: <span id="points">0</span>
+  </div>
+
+  <button id="watchAdBtn">Watch Ad (Earn 10 Points)</button>
+
+  <div class="ad-section">
+    <h3>Sponsored Ad:</h3>
+    <div class="ad-placeholder" id="adPlaceholder">
+      <!-- PLACEHOLDER: Replace this with your AdSense code when approved -->
+      [Your Ad Will Appear Here]
+    </div>
+  </div>
+
+  <footer>
+    <p><a href="#">Privacy Policy</a> | <a href="#">Contact</a></p>
+    <p>&copy; 2025 Sonic Plinko Stars</p>
+  </footer>
+
+  <script>
+    let points = parseInt(localStorage.getItem("points") || "0");
+    const pointsEl = document.getElementById("points");
+    const watchAdBtn = document.getElementById("watchAdBtn");
+    const adPlaceholder = document.getElementById("adPlaceholder");
+
+    function updatePoints() {
+      pointsEl.innerText = points;
+      localStorage.setItem("points", points);
+    }
+
+    watchAdBtn.onclick = () => {
+      adPlaceholder.innerText = "[Ad Playing... 5 seconds]";
+      watchAdBtn.disabled = true;
+
+      setTimeout(() => {
+        adPlaceholder.innerText = "[Your Ad Will Appear Here]";
+        points += 10;
+        updatePoints();
+        watchAdBtn.disabled = false;
+      }, 5000);
+    };
+
+    updatePoints();
+  </script>
+</body>
+</html>
