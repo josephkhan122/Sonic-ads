@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sonic Watch & Earn</title>
+
+  <!-- Your actual AdSense script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2842970890676346"
+     crossorigin="anonymous"></script>
+
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -43,15 +48,7 @@
       margin-right: auto;
     }
     .ad-placeholder {
-      width: 300px;
-      height: 250px;
-      background: #ddd;
       margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      color: #333;
     }
     footer {
       margin-top: 50px;
@@ -75,9 +72,17 @@
 
   <div class="ad-section">
     <h3>Sponsored Ad:</h3>
-    <div class="ad-placeholder" id="adPlaceholder">
-      <!-- PLACEHOLDER: Replace this with your AdSense code when approved -->
-      [Your Ad Will Appear Here]
+    <div class="ad-placeholder">
+      <!-- Your AdSense display ad block -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-2842970890676346"
+           data-ad-slot="1234567890"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
     </div>
   </div>
 
@@ -90,7 +95,6 @@
     let points = parseInt(localStorage.getItem("points") || "0");
     const pointsEl = document.getElementById("points");
     const watchAdBtn = document.getElementById("watchAdBtn");
-    const adPlaceholder = document.getElementById("adPlaceholder");
 
     function updatePoints() {
       pointsEl.innerText = points;
@@ -98,15 +102,12 @@
     }
 
     watchAdBtn.onclick = () => {
-      adPlaceholder.innerText = "[Ad Playing... 5 seconds]";
       watchAdBtn.disabled = true;
-
+      points += 10;
+      updatePoints();
       setTimeout(() => {
-        adPlaceholder.innerText = "[Your Ad Will Appear Here]";
-        points += 10;
-        updatePoints();
         watchAdBtn.disabled = false;
-      }, 5000);
+      }, 5000); // Cooldown
     };
 
     updatePoints();
